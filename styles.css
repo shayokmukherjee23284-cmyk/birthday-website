@@ -139,6 +139,10 @@ body::selection {
   line-height: 0.9;
 }
 
+.countdown-grid .birthday-now {
+  grid-column: 1 / -1;
+}
+
 .eyebrow {
   margin: 0 0 0.8rem;
   color: rgba(255, 218, 229, 0.72);
