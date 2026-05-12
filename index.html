@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A soft romantic birthday website for Nandika with a personal blog, childhood photo, and birthday wishes."
+    />
+    <title>Happy Birthday, Nandika</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&family=Parisienne&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="stars" aria-hidden="true"></div>
+
+    <header class="hero">
+      <p class="eyebrow">Happy Birthday</p>
+      <h1>Nandika</h1>
+      <p class="subtitle">Today is about someone truly special.</p>
+      <section class="countdown glass" aria-label="Countdown to Nandika's birthday">
+        <p>Countdown to 14th May</p>
+        <div id="countdown" class="countdown-grid">
+          <span><strong>00</strong>Days</span>
+          <span><strong>00</strong>Hours</span>
+          <span><strong>00</strong>Minutes</span>
+          <span><strong>00</strong>Seconds</span>
+        </div>
+      </section>
+      <a class="scroll-link" href="#story">Scroll to explore</a>
+    </header>
+
+    <main>
+      <section id="story" class="section two-column">
+        <div>
+          <p class="eyebrow">A little blog</p>
+          <h2>For the girl with a soft heart.</h2>
+          <article class="glass blog-card">
+            <p>
+              Nandika is the kind of person whose presence feels gentle even before she says much.
+              She feels deeply, cares sincerely, and carries a heart that still chooses kindness
+              even when life gives her reasons to become harder.
+            </p>
+            <p>
+              There is something rare about her. The cute smile, the emotional reactions, the way
+              she overthinks tiny things because they matter to her, and the quiet strength behind
+              all of it. She is soft, but not weak. She is emotional, but not careless. She is
+              innocent, but full of values.
+            </p>
+            <p>
+              Her dream of making her parents proud says everything about her heart. She wants to
+              become someone they can look at and say, “She did it.” And maybe she does not realize
+              it enough, but people like her make the world warmer just by existing.
+            </p>
+          </article>
+        </div>
+
+        <aside class="photo-panel glass">
+          <div class="memory-stack">
+            <figure class="photo-frame">
+              <img src="photos/childhood-portrait.jpg" alt="Nandika as a baby" />
+              <figcaption>Her earliest softness.</figcaption>
+            </figure>
+            <figure class="photo-frame photo-frame-offset">
+              <img src="photos/childhood-memory.jpeg" alt="A childhood memory of Nandika" />
+              <figcaption>A tiny memory, still glowing.</figcaption>
+            </figure>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <p class="eyebrow">Birthday wishes</p>
+        <h2>Leave something beautiful for her.</h2>
+        <p class="section-note">
+          When online sharing is connected, every visitor can read all posted birthday wishes here.
+        </p>
+        <div class="wish-layout">
+          <form id="wishForm" class="glass wish-form">
+            <label for="wishInput">Anonymous wish</label>
+            <textarea
+              id="wishInput"
+              maxlength="260"
+              placeholder="Write something beautiful for Nandika..."
+              required
+            ></textarea>
+            <button type="submit">Post wish</button>
+            <p id="wishStatus" class="status"></p>
+          </form>
+
+          <div id="wishList" class="wish-list" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section ending">
+        <p class="handwritten">One last line...</p>
+        <h2>The world became a little more beautiful the day you were born.</h2>
+        <footer>Made with love for Nandika.</footer>
+      </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+What can be done with GitHub only?
+
+GitHub Pages can host the website for free, but it is static hosting. That means it can show HTML, CSS, JavaScript, and images, but it cannot save birthday wishes by itself.
+
+To let everyone see the same birthday wishes, you need one free database. This site is already prepared for Supabase.
+
+Part 1: Make wishes public for all visitors
+
+1. Create a free Supabase account:
+   https://supabase.com
+
+2. Create a new project.
+
+3. Open SQL Editor and run this:
+
+create table if not exists public.wishes (
+  id uuid primary key default gen_random_uuid(),
+  message text not null check (char_length(message) between 3 and 260),
+  created_at timestamptz not null default now()
+);
+
+alter table public.wishes enable row level security;
+
+create policy "Anyone can read birthday wishes"
+on public.wishes
+for select
+to anon
+using (true);
+
+create policy "Anyone can post birthday wishes"
+on public.wishes
+for insert
+to anon
+with check (true);
+
+alter publication supabase_realtime add table public.wishes;
+
+4. In Supabase, go to Project Settings > API.
+
+5. Copy:
+   - Project URL
+   - anon public key
+
+6. Open config.js and paste them:
+
+window.NANDIKA_SITE_CONFIG = {
+  SUPABASE_URL: "https://your-project.supabase.co",
+  SUPABASE_ANON_KEY: "your-anon-public-key"
+};
+
+After this, wishes posted by anyone will be saved in Supabase and readable by everyone visiting the website.
+
+Part 2: Host free on GitHub Pages
+
+Use the docs folder in this project. It contains the publish-ready simple website.
+
+1. Create a new public GitHub repository.
+
+2. Upload everything inside the docs folder to that repository, or upload the full project and use /docs as the Pages source.
+
+3. Go to your repository on GitHub.
+
+4. Open Settings > Pages.
+
+5. Under Build and deployment:
+   - Source: Deploy from a branch
+   - Branch: main
+   - Folder: /docs
+
+6. Click Save.
+
+7. Wait a minute or two. GitHub will show the live URL, usually:
+   https://your-username.github.io/your-repository-name/
+
+Important:
+- Do not put private photos or private information in the repository if you do not want it public.
+- The Supabase anon key is safe to use in frontend code when Row Level Security policies are enabled as shown above.
