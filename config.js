@@ -1,4 +1,4 @@
 window.NANDIKA_SITE_CONFIG = {
-  SUPABASE_URL: "https://supabase.com/dashboard/project/daqthckhwgmlkozgtwsy",
+  SUPABASE_URL: "https://daqthckhwgmlkozgtwsy.supabase.co",
   SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRhcXRoY2tod2dtbGtvemd0d3N5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1ODg1NDgsImV4cCI6MjA5NDE2NDU0OH0.-C9bUJlsoT2mCIQF54tOJ-Oiuy1yZsPZ901brU5UtnY"
 };
