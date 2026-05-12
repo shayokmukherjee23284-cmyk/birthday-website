@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+  <defs>
+    <radialGradient id="g" cx=".5" cy=".35" r=".75">
+      <stop offset="0" stop-color="#fff0f5"/>
+      <stop offset=".45" stop-color="#d86f99"/>
+      <stop offset="1" stop-color="#190710"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#g)"/>
+  <circle cx="400" cy="340" r="140" fill="#fff7fa" opacity=".25"/>
+  <path d="M210 760c70-165 310-165 380 0v240H210z" fill="#fff7fa" opacity=".16"/>
+  <text x="400" y="885" fill="#fff7fa" text-anchor="middle" font-family="Georgia, serif" font-size="42">
+    Childhood Photo
+  </text>
+</svg>
