@@ -1,45 +1,3 @@
-const siteConfig = window.NANDIKA_SITE_CONFIG || {};
-const SUPABASE_URL = siteConfig.SUPABASE_URL || "";
-const SUPABASE_ANON_KEY = siteConfig.SUPABASE_ANON_KEY || "";
-
-const sampleWishes = [
-  {
-    message: "Happy birthday, Nandika. May this year be soft, beautiful, and full of proud moments.",
-    created_at: new Date().toISOString()
-  },
-  {
-    message: "A heart like yours deserves a gentle world. Keep smiling.",
-    created_at: new Date().toISOString()
-  }
-];
-
-const form = document.querySelector("#wishForm");
-const input = document.querySelector("#wishInput");
-const list = document.querySelector("#wishList");
-const statusText = document.querySelector("#wishStatus");
-const countdown = document.querySelector("#countdown");
-
-let wishes = [];
-let supabaseClient = null;
-
-function getBirthdayTarget() {
-  const now = new Date();
-  let target = new Date(now.getFullYear(), 4, 14, 0, 0, 0);
-
-  if (now > target) {
-    target = new Date(now.getFullYear() + 1, 4, 14, 0, 0, 0);
-  }
-
-  return target;
-}
-
-function updateCountdown() {
-  if (!countdown) return;
-
-  const target = getBirthdayTarget();
-  const distance = Math.max(0, target - new Date());
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((distance / (1000 * 60)) % 60);
   const seconds = Math.floor((distance / 1000) % 60);
   const values = [
@@ -111,7 +69,7 @@ async function loadSharedWishes() {
 
   if (error) {
     loadLocalWishes();
-    statusText.textContent = "Could not connect online, using browser preview mode.";
+    statusText.textContent = `Could not connect online: ${describeSupabaseError(error)}`;
     return;
   }
 
@@ -125,7 +83,11 @@ async function loadSharedWishes() {
       wishes = [payload.new, ...wishes];
       renderWishes();
     })
-    .subscribe();
+    .subscribe((status) => {
+      if (status === "SUBSCRIBED") {
+        statusText.textContent = "Online wishes are live. Everyone visiting can read wishes posted here.";
+      }
+    });
 }
 
 form.addEventListener("submit", async (event) => {
@@ -145,9 +107,11 @@ form.addEventListener("submit", async (event) => {
   if (supabaseClient) {
     const { error } = await supabaseClient.from("wishes").insert({ message });
     if (error) {
-      statusText.textContent = "Wish could not be posted right now.";
+      statusText.textContent = `Wish could not be posted: ${describeSupabaseError(error)}`;
       return;
     }
+    wishes = [wish, ...wishes];
+    renderWishes();
   } else {
     wishes = [wish, ...wishes.filter((item) => !sampleWishes.includes(item))];
     try {
@@ -166,4 +130,27 @@ if (canUseSupabase()) {
   loadSharedWishes();
 } else {
   loadLocalWishes();
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    statusText.textContent = "Online wishes are not connected yet. Add Supabase URL and anon key in config.js.";
+  } else if (!window.supabase) {
+    statusText.textContent = "Supabase library did not load. Check your internet connection or CDN access.";
+  }
 }
+
+Latest turn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
